@@ -19,9 +19,12 @@ type NestInRpcResponseOrNull<T> = Readonly<{
 }>;
 
 type GetAccountInfoApiCommonConfig = Readonly<{
-    // Defaults to `finalized`
+    /**
+     * Fetch the details of the account as of the highest slot that has reached this level of
+     * commitment. Defaults to `finalized`.
+     */
     commitment?: Commitment;
-    // The minimum slot that the request can be evaluated at
+    /** The minimum slot that the request can be evaluated at */
     minContextSlot?: Slot;
 }>;
 
@@ -32,7 +35,11 @@ type GetAccountInfoApiSliceableCommonConfig = Readonly<{
 
 export type GetAccountInfoApi = {
     /**
-     * Returns all information associated with the account of provided public key
+     * Fetches information associated with the account at the given address.
+     *
+     * If the account has data, it will be returned in the response as a base64-encoded string.
+     *
+     * @see https://solana.com/docs/rpc/http/getaccountinfo
      */
     getAccountInfo(
         address: Address,
@@ -42,6 +49,15 @@ export type GetAccountInfoApi = {
                 encoding: 'base64';
             }>,
     ): GetAccountInfoApiResponseBase & NestInRpcResponseOrNull<AccountInfoWithBase64EncodedData>;
+    /**
+     * Fetches information associated with the account at the given address.
+     *
+     * If the account has data, it will first be compressed using
+     * [ZStandard](https://facebook.github.io/zstd/) and the result will be returned in the response
+     * as a base64-encoded string.
+     *
+     * @see https://solana.com/docs/rpc/http/getaccountinfo
+     */
     getAccountInfo(
         address: Address,
         config: GetAccountInfoApiCommonConfig &
@@ -50,6 +66,16 @@ export type GetAccountInfoApi = {
                 encoding: 'base64+zstd';
             }>,
     ): GetAccountInfoApiResponseBase & NestInRpcResponseOrNull<AccountInfoWithBase64EncodedZStdCompressedData>;
+    /**
+     * Fetches information associated with the account at the given address.
+     *
+     * If the account has data, the server will attempt to process it using a parser specific to the
+     * account's owning program. If successful, the parsed data will be returned in the response as
+     * JSON. Otherwise, the raw account data will be returned in the response as a base64-encoded
+     * string.
+     *
+     * @see https://solana.com/docs/rpc/http/getaccountinfo
+     */
     getAccountInfo(
         address: Address,
         config: GetAccountInfoApiCommonConfig &
@@ -57,6 +83,14 @@ export type GetAccountInfoApi = {
                 encoding: 'jsonParsed';
             }>,
     ): GetAccountInfoApiResponseBase & NestInRpcResponseOrNull<AccountInfoWithJsonData>;
+    /**
+     * Fetches information associated with the account at the given address.
+     *
+     * If the account has data, it will be returned in the response as a base58-encoded string. If
+     * the account contains more than 129 bytes of data, this method will raise an error.
+     *
+     * @see https://solana.com/docs/rpc/http/getaccountinfo
+     */
     getAccountInfo(
         address: Address,
         config: GetAccountInfoApiCommonConfig &
@@ -65,6 +99,11 @@ export type GetAccountInfoApi = {
                 encoding: 'base58';
             }>,
     ): GetAccountInfoApiResponseBase & NestInRpcResponseOrNull<AccountInfoWithBase58EncodedData>;
+    /**
+     * Fetches information associated with the account at the given address.
+     *
+     * @see https://solana.com/docs/rpc/http/getaccountinfo
+     */
     getAccountInfo(
         address: Address,
         config?: GetAccountInfoApiCommonConfig,

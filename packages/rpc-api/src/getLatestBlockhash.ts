@@ -13,7 +13,12 @@ export type GetLatestBlockhashApi = {
      */
     getLatestBlockhash(
         config?: Readonly<{
+            /**
+             * Fetch the latest blockhash as of the highest slot that has reached this level of
+             * commitment. Defaults to `finalized`.
+             */
             commitment?: Commitment;
+            /** The minimum slot that the request can be evaluated at */
             minContextSlot?: Slot;
         }>,
     ): SolanaRpcResponse<GetLatestBlockhashApiResponse>;

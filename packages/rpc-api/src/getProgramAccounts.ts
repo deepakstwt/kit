@@ -16,7 +16,10 @@ import type {
 } from '@solana/rpc-types';
 
 type GetProgramAccountsApiCommonConfig = Readonly<{
-    /** @defaultValue "finalized" */
+    /**
+     * Fetch the details of the accounts as of the highest slot that has reached this level of
+     * commitment. Defaults to `finalized`.
+     */
     commitment?: Commitment;
     /** filter results (up to 4 filters allowed) @see https://docs.solana.com/api/http#filter-criteria */
     filters?: (GetProgramAccountsDatasizeFilter | GetProgramAccountsMemcmpFilter)[];

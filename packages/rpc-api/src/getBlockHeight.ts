@@ -8,9 +8,12 @@ export type GetBlockHeightApi = {
      */
     getBlockHeight(
         config?: Readonly<{
-            // Defaults to `finalized`
+            /**
+             * Fetch the block height as of the highest slot that has reached this level of
+             * commitment. Defaults to `finalized`.
+             */
             commitment?: Commitment;
-            // The minimum slot that the request can be evaluated at
+            /** The minimum slot that the request can be evaluated at */
             minContextSlot?: Slot;
         }>,
     ): GetBlockHeightApiResponse;

@@ -10,6 +10,10 @@ type SlotRange = Readonly<{
 }>;
 
 type GetBlockProductionApiConfigBase = Readonly<{
+    /**
+     * Fetch the block production information as of the highest slot that has reached this level of
+     * commitment. Defaults to `finalized`.
+     */
     commitment?: Commitment;
     range?: SlotRange;
 }>;

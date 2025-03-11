@@ -4,7 +4,15 @@ import type { Base64EncodedWireTransaction } from '@solana/transactions';
 
 type SendTransactionConfig = Readonly<{
     maxRetries?: bigint;
+    /** The minimum slot that the request can be evaluated at */
     minContextSlot?: Slot;
+    /**
+     * Simulate the transaction as of the highest slot that has reached this level of commitment.
+     *
+     * Has no effect when `skipPreflight` is set to `true`.
+     *
+     * @defaultValue "finalized"
+     */
     preflightCommitment?: Commitment;
     skipPreflight?: boolean;
 }>;
