@@ -1,6 +1,7 @@
 [![npm][npm-image]][npm-url]
 [![npm-downloads][npm-downloads-image]][npm-url]
 <br />
+[list.data may be one of the reason why thr person is ot having a CorporTE ISSUE FOR THAT IF I AM ANOT RIGHT WOEK MAKE SSURE YOU WOULD HAVE TH RIGHT 
 [![code-style-prettier][code-style-prettier-image]][code-style-prettier-url]
 
 [code-style-prettier-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
